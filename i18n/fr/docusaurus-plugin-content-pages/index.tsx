@@ -28,11 +28,11 @@ function Features() {
           <img src="img/shot-node.png" alt="" className='mr-40 w-2/5' />
           <div>
             <Title>
-              功能强大且友好易用的用户端
+              功能强大且友好易用的web端
             </Title>
 
             <Description className='mt-8'>
-              对于非开发者，bloc还精心设计和开发了一个网页应用端， 在这里，用户以及开发者自身可以查看开发者提供的所有function。当然，更重要的是，用户点点鼠标就可以消费这些function来构建和运行工作流程。
+              对于非开发者，bloc还精心设计和开发了一个web应用端， 在这里，用户以及开发者自身可以查看开发者提供的所有function。当然，更重要的是，用户点点鼠标就可以消费这些function来构建和运行工作流程。
             </Description>
             <Description className='mt-4'>
               在构建工作流程时，function的入参既可以是上一个function的运行结果，也可以按需被手动设置为固定数据，要完成这些并不复杂，只是简单的拖拽操作或者输入表单而已。
@@ -81,7 +81,7 @@ function Features() {
                 完善的日志系统
               </Title>
               <Description className='mt-8'>
-                想要全面掌握function运行时产生的消息、警告或错误信息吗？没问题！bloc提供了完善的日志上传及展示方案，不仅如此，bloc还支持在用户端展示function实时的运行进度，知悉工作流程乃至function节点的运行情况从此易如反掌。
+                想要全面掌握function运行时产生的消息、警告或错误信息吗？没问题！bloc提供了完善的日志上传及展示方案，不仅如此，bloc还支持在web端展示function实时的运行进度，知悉工作流程乃至function节点的运行情况从此易如反掌。
               </Description>
             </div>
             <img src="img/log.png" alt="" className='ml-40 w-2/5 object-cover' />
@@ -105,7 +105,7 @@ function Features() {
               强大的可复用性
             </Title>
             <Description className='mt-8'>
-              支持跨团队、跨代码仓库、跨语言的functions复用。只要是在bloc-server中注册的functions，都能在用户端被直接消费使用。
+              支持跨团队、跨代码仓库、跨语言的functions复用。只要是在bloc-server中注册的functions，都能在web端被直接消费使用。
             </Description>
           </div>
           <img src="img/nodes.png" alt="" className='ml-40 w-96' />

@@ -16,7 +16,7 @@ function Features() {
             你提供函数，剩下的交给Bloc
             </Title>
             <Description className='mt-8'>
-              在部署好bloc环境后，开发者可基于对应语言的SDK实现自己业务逻辑的函数，发布后这些函数便可以在boc上被使用了。所有用户都可通过在bloc用户端自定义组合与编排这些函数, 实现定制的工作流程，满足其特定的需求。
+              在部署好bloc环境后，开发者可基于对应语言的SDK实现自己业务逻辑的函数，发布后这些函数便可以在boc上被使用了。所有用户都可通过在bloc的web端自定义组合与编排这些函数, 实现定制的工作流程，满足其特定的需求。
             </Description>
           </div>
         </div>
@@ -28,7 +28,7 @@ function Features() {
           <img src="/img/shot-node.png" alt="" className='mr-40 w-2/5' />
           <div>
             <Title>
-              功能强大且友好易用的用户端
+              功能强大且友好易用的web端
             </Title>
 
             <Description className='mt-8'>
@@ -81,7 +81,7 @@ function Features() {
                 运行状态了如指掌  
               </Title>
               <Description className='mt-8'>
-                想要全面掌握函数的运行状态吗？没问题！bloc用户端支持实时的、完整的运行日志和运行进度百分比展示，让你对工作流程乃至函数节点的运行情况了如指掌。
+                想要全面掌握函数的运行状态吗？没问题！bloc的web端支持实时的、完整的运行日志和运行进度百分比展示，让你对工作流程乃至函数节点的运行情况了如指掌。
               </Description>
             </div>
             <img src="/img/log.png" alt="" className='ml-40 w-2/5 object-cover rounded-lg' />
@@ -105,7 +105,7 @@ function Features() {
               强大的可复用性
             </Title>
             <Description className='mt-8'>
-              支持跨团队、跨代码仓库、跨语言的函数复用。只要是在bloc-server中注册的函数，都能在用户端被直接消费使用。
+              支持跨团队、跨代码仓库、跨语言的函数复用。只要是在bloc-server中注册的函数，都能在bloc的web端被直接消费使用。
             </Description>
           </div>
           <img src="/img/cooperate.png" alt="" className='ml-40 w-96' />
