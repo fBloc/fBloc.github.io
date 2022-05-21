@@ -13,7 +13,6 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.svg',
-
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'fbloc', // Usually your GitHub org/user name.
@@ -65,6 +64,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       disableSwitch: true,
+      metadata: [
+        {name: 'keywords', content: 'bloc,flow,work,arrangement'}
+      ],
       navbar: {
         title: '',
         logo: {
