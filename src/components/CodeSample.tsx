@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import highlight from 'highlight.js';
-// import 'highlight.js/styles/a11y-dark.css';
 import 'highlight.js/styles/atom-one-dark.css';
 
 
@@ -26,8 +25,8 @@ const CodeSample = () => {
     <Title>
       同时支持Python和Go
     </Title>
-    <Description className='mt-10 max-w-screen-lg text-left mx-auto'>
-      不论你的functions是基于Python还是Go，它们都可以在bloc上运行。这意味着你无需在Go和Python中二选一，在某个工作流程中，上一个节点是用Python写的function，而下一个节点则是用Go写的function的这种情况是完全被支持的。
+    <Description className='mt-10 text-left mx-auto'>
+      不论你的函数是基于Python还是Go，它们都可以在bloc上运行。这意味着你无需在Go和Python中二选一，在某个工作流程中，上一个节点是用Python写的函数，而下一个节点则是用Go写的函数的这种情况是完全被支持的。
     </Description>
     <div className='mt-6 text-left'>
       <button onClick={() => {

@@ -1,0 +1,8 @@
+{
+  "label": "跑个Demo",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "废话少说，先看东西🤓。你可以根据你的技术栈/偏好选择查看Go或者Python的示例文档，二者只有语言不同，运行结果是一致的。"
+  }
+}
