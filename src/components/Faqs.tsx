@@ -130,6 +130,9 @@ const Faqs = () => {
         </li>
       </ul>
     </Item>
+    <Item title="bloc是开源项目吗？">
+      是的
+    </Item>
   </div>
 }
 
