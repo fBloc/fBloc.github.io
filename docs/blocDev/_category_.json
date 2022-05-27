@@ -3,6 +3,6 @@
   "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "根据你的技术栈/偏好开发Go或者Python 的bloc函数，以下文档二选一即可。"
+    "description": "根据你的技术栈/偏好选择基于 Go 或 Python 开发 bloc函数"
   }
 }

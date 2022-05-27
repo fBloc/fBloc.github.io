@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 ---
-# 关于开发bloc function
+# 开发bloc函数的建议
 
 一个好的bloc function的标准应包含：
 1. 拥有可读性高的名字和介绍（别人都看不懂的话、最后肯定还是会来找你问）

@@ -1,8 +1,8 @@
 {
-  "label": "FAQS",
+  "label": "FAQ",
   "position": 5,
   "link": {
     "type": "generated-index",
-    "description": "一些可能会被问到的问题。"
+    "description": "常见问题。"
   }
 }

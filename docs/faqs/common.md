@@ -2,10 +2,10 @@
 sidebar_position: 1
 ---
 
-# 通用
+# 名词/概念解释
 
 - flow：等同于工作流程
-- function、bloc function、bloc node、bloc function node：均指能够在bloc前端中被拖拽进入工作流进行编排并运行的节点
+- function、bloc function、bloc node、bloc function node、bloc函数：均指能够在bloc前端中被拖拽进入工作流进行编排并运行的节点
 - client SDK: 指开发者开发bloc function时需要用到的对应编程语言的SDK。如 [Go SDK](https://github.com/fBloc/bloc-client-go)、[Python SDK](https://github.com/fBloc/bloc-client-python)。SDK是封装了以下逻辑的代码：
   - 向bloc报告提供的functions的信息
   - 接收bloc调度发来的执行其下某个function的信息

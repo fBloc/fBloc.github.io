@@ -2,41 +2,44 @@
 sidebar_position: 2
 ---
 
-# bloc-client-python
+# Python
 
 :::tip本页面的文档内容可能不是最新
-请在[这里](https://github.com/fBloc/bloc-client-python#readme)查看最新文档。
+请在[这里](https://github.com/fBloc/bloc-client-python/blob/main/README.zh-CN.md)查看最新文档。
 :::
 
-The python language client SDK for [bloc](https://github.com/fBloc/bloc).
+可以基于此SDK使用开发基于python语言的 `bloc function`
 
-You can develop bloc's function node in python language based on this SDK.
+在继续之前，请确保你已经大概了解了[bloc](https://github.com/fBloc/bloc)是什么，并且已经通过[教程](https://github.com/fBloc/bloc/blob/main/docs/guide/deploy_local_environment_guide.md)在本地环境部署了bloc环境
 
-First make sure you already have a knowledge of [bloc](https://github.com/fBloc/bloc) and already have deployed a local test bloc environment(see [deploy a local bloc environment](https://github.com/fBloc/bloc/blob/main/docs/guide/deploy_local_environment_guide.md)).
+## bloc function是什么？
+bloc function就是开发者通过对应语言的bloc client SDK开发的一个函数，其在部署后便能够被用户在bloc前端看到，并可被编入工作流进行组合和自定义设置参数。待到对应工作流执行时到此函数时，就会按照用户在前端配置的参数进行执行并上报运行信息和运行结果到bloc。
 
-## Develop bloc function node tutorial
-Let's write a simple bloc function node which receive some integers and do a designated mathematical calculation to these integers.
+## 开发bloc function教程
+这里我们通过编写一个简单的 bloc function来进行说明。
 
-### prepare
-- create a python program directory and initial it:
+其接收多个整数，并且接收一个特定的算法。然后对那些数字执行对应的算法
+
+### 准备
+- 创建目录
     ```shell
     mkdir bloc_py_tryout && cd bloc_py_tryout
     ```
-- create virtual environment by yourself
-- install sdk:
+- 如果需要的话，请按照你习惯的方式创建一个虚拟环境
+- 安装python版本的bloc client SDK:
     ```shell
     pip install bloc_client
     ```
 
-### write bloc function node
-1. first create a class which stand for the function node:
+### 编写bloc function
+1. 首先创建一个对象、其表示了这个bloc function节点
     ```python
     # math_calcu.py
     class MathCalcu(FunctionInterface):
     ```
-    then the function node should implement the [FunctionInterface](https://github.com/fBloc/bloc-client-python/blob/main/bloc_client/function_interface.py#L10).
+    而后此bloc function 需要实现 [FunctionInterface](https://github.com/fBloc/bloc-client-python/blob/main/bloc_client/function_interface.py#L10).
 
-2. implement ipt_config() which defined function node's input params:
+2. 实现 ipt_config() 方法 - 其描述了此function需要的入参:
     ```python
     def ipt_config(self) -> List[FunctionIpt]:
         return [
@@ -72,10 +75,10 @@ Let's write a simple bloc function node which receive some integers and do a des
         ]
     ```
 
-3. implement opt_config() which defined function node's opt:
+3. 实现 opt_config() - 其描述了此function需要的出参:
     ```python
     def opt_config(self) -> List[FunctionOpt]:
-        # returned list type for a fixed order to show in the frontend which lead to a better user experience
+        # 这里也返回成list数据类型，是为了在前端能够显示为一个固定的顺序
         return [
             FunctionOpt(
                 key="result",
@@ -85,9 +88,9 @@ Let's write a simple bloc function node which receive some integers and do a des
         ]
     ```
 
-4. implement all_progress_milestones() which define the highly readable describe milestones of the function node's run:
+4.  实现 all_progress_milestones() - 其定义了此函数在运行进度过程中的高可读的里程碑事件
 
-    all_progress_milestones() is designed for long run function, during it is running, it can report it's current running milestone for the user in frontend to get the information.If your function is quick run. maybe no need to set it and just return blank.
+    此设计主要是为运行时间较长的函数准备的。当其正在运行时，其可以上报自己当前运行到的进度里程碑。从而关心进度的人能够在bloc前端看到此信息。如果你的bloc function很快就能运行完成，那就没必要设置这个了。
 
     ```python
     def all_progress_milestones(self) -> List[str]:
@@ -98,31 +101,30 @@ Let's write a simple bloc function node which receive some integers and do a des
     ```
 
 
-5. implement run() which do the real work:
+5. 实现 run() - 真正的执行逻辑:
     ```python
     def run(
         self, 
         ipts: List[FunctionIpt], 
         queue: FunctionRunMsgQueue
     ) -> FunctionRunOpt:
-        # logger msg will be reported to bloc-server and can be represent in the frontend
-	    # which means during this function's running, the frontend can get the realtime log msg
+        # 日志信息会被立即上传到bloc并能在bloc前端被访问到
+        # 也就是说运行中的函数，其实时日志能在bloc前端看到
         queue.report_log(LogLevel.info, "start")
 
-        # AllProcessStages() index 0 - "parsing ipt". which will be represented in the frontend immediately.
+        # 汇报进度里程碑：这里的汇报索引是0。其也能实时在bloc前端被看到
         queue.report_high_readable_progress(progress_milestone_index=0)
 
         numbersSlice = ipts[0].components[0].value
         if not numbersSlice:
             queue.report_function_run_finished_opt(
                 FunctionRunOpt(
-                    suc=False,  # function run failed
-                    intercept_below_function_run=True,  # intercept flow's below function run (you can think like raise exception in the flow)
-                    error_msg="parse ipt `numbers` failed",  # error description
+                    suc=False,  # 函数运行失败了
+                    intercept_below_function_run=True,  # 拦截此节点下游节点的运行
+                    error_msg="parse ipt `numbers` failed",  # 报错描述
                 )
             )
-            # suc can be false and intercept_below_function_run can also be false
-			# which means this function node's fail should not intercept it's below function node's running
+            # 当函数运行失败时，也可以选择不拦截其下游的运行
             return
 
         try:
@@ -165,10 +167,10 @@ Let's write a simple bloc function node which receive some integers and do a des
             )
         )
     ```
-- By now, we finished write the code of a bloc function node, next we will write unit test code to this function node
+- 到此，我们完成了bloc function的核心定义代码。接下来我们它写测试代码
 
-### write unit test
-- write a simple unit test in `math_calcu_test.py`:
+### 编写单元测试代码
+- 在`math_calcu_test.py`中编写简单的测试:
     ```python
     # math_calcu_test.py
     import unittest
@@ -203,7 +205,7 @@ Let's write a simple bloc function node which receive some integers and do a des
     if __name__ == '__main__':
         unittest.main()
     ```
-- Run `python math_calcu_test.py`, you will see the OK. which means your function run meet your expectation.
+- 运行 `python math_calcu_test.py`, 你会看到`OK`, 表示你开发的函数的运行满足你的预期
     ```python
     $ python math_calcu_test.py
     2022-05-20 17:46:39,989 INFO received log msg: FunctionRunMsg(level=<LogLevel.info: 'info'>, msg='start')
@@ -218,12 +220,12 @@ Let's write a simple bloc function node which receive some integers and do a des
     OK
     ```
 
-### report to the server
-After make sure your function runs well, you can deploy it to report to bloc.
+### 向 bloc-server 汇报
+当通过编写足够的测试确认你的函数运行没有问题了之后，你可以通过部署它来向bloc-server进行汇报
 
-I suppose you have already deployed a local bloc environment. if not, follow [guide](https://github.com/fBloc/bloc/blob/main/docs/guide/deploy_local_environment_guide.md) to deploy it.
+这里我假设你已经通过[教程](https://github.com/fBloc/bloc/blob/main/docs/guide/deploy_local_environment_guide.md)部署了一套本地bloc环境。如果是的话、请继续。
 
-- During `bloc_py_tryout` directory and make a `main.py` file with content:
+- 在 `bloc_py_tryout` 目录创建一个`main.py`文件，并写入内容:
     ```python
     import asyncio
 
@@ -254,19 +256,18 @@ I suppose you have already deployed a local bloc environment. if not, follow [gu
 
         await bloc_client.run()
 
-
     if __name__ == "__main__":
         asyncio.run(main())
     ```
-- now run it:
+- 运行:
     ```shell
     $ python run main.py
     ```
 
-- After suc run, this client's all function node are registered to the bloc-server, which can be see and operate in the frontend, and this client will receive bloc-server's trigger function to run msg and do the execute. If you are first to the bloc web, you may check this [brief introduction to bloc web](#todo)
+- 运行成功后，此bloc function就成功提交到bloc了。从而你可以在bloc web端看到与使用此function了（如果你刚刚接触bloc web端、不清楚有哪些操作，可见[教程](https://docs.blocapp.xyz/docs/category/web%E7%AB%AF%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B)）
 
-### total code 
-you can find the demo code [here](https://github.com/fBloc/bloc-client-python/tree/main/bloc_py_tryout)
+### 完整代码
+[这里](https://github.com/fBloc/bloc-client-python/tree/main/bloc_py_tryout)
 
-## Other references
-- you can find more bloc function node examples [here](https://github.com/fBloc/bloc-function-demo-py)
+## 其他资料
+- 你可以在[这里](https://github.com/fBloc/bloc-function-demo-py) 找到更多更复杂的bloc function例子
