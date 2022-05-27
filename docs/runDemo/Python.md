@@ -10,32 +10,41 @@ sidebar_position: 2
 :::
 
 - clone项目到本地并进入相应目录：
-```shell
-git clone https://github.com/fBloc/bloc-function-demo-py.git && cd bloc-function-demo-py
-```
+    ```shell
+    git clone https://github.com/fBloc/bloc-function-demo-py.git && cd bloc-function-demo-py
+    ```
 
 - 安装bloc环境
-```shell
-/bin/bash ./startup.sh
-```
-
+    ```shell
+    /bin/bash ./startup.sh
+    ```
+- 检查安装 - 如果全部成功、应当有如下6个运行中的镜像 container
+    ```shell
+    $ docker ps 
+    IMAGE                                      STATUS              PORTS                                                                                                         NAMES
+    blocapp/bloc-web                           Up About a minute   0.0.0.0:8083->80/tcp                                                                                          bloc_web
+    blocapp/bloc-server                        Up About a minute   0.0.0.0:8080->8080/tcp                                                                                        bloc_server
+    minio/minio:RELEASE.2021-11-24T23-19-33Z   Up About a minute   0.0.0.0:9000->9000/tcp                                                                                        minio_bloc
+    mongo:5.0.5                                Up About a minute   0.0.0.0:27017->27017/tcp                                                                                      mongo_bloc
+    rabbitmq:3.9.11-management-alpine          Up About a minute   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   rabbit_bloc
+    influxdb:2.1.1                             Up About a minute   0.0.0.0:8086->8086/tcp                                                                                        influx_bloc
+    ```
 - 安装python依赖（建议先创建一个虚拟环境；建议使用python版本 ≥ 3.8）
-```shell
-pip install -r requirements.txt
-```
+    ```shell
+    pip install -r requirements.txt
+    ```
 
 - 运行functions client实例向bloc注册函数
-```shell
-python main.py
-```
+    ```shell
+    python main.py
+    ```
 
-- 大功告成啦。请到浏览器访问 `http://localhost:8083` 进行试用吧！
+- 大功告成啦 👏。请到浏览器访问 `http://localhost:8083` 进行试用吧！
 
 ## 备注：
 - 如果上面步骤有失败、欢迎[提交issue](https://github.com/fBloc/bloc/issues)
-- 可运行命令`/bin/bash ./shutdown.sh`清理安装的容器
+- 可运行命令 `/bin/bash ./shutdown.sh` 清理安装的容器
 
 ## 进一步的参考资料：
-- 前端功能简介：todo
-- 探索每个function是如何开发的？`./bloc_node`目录下的每个package都是与前端一一对应的function，其在`./main.py`中被引入并注册。请对应着前端展示的信息看一起看、相信你看了后也可以依样的开发出你自己的函数来、开发好后只需重新运行`python run main.go`就可以在前端看到你开发的函数啦！试试吧！
-- bloc函数节点开发教程：外链 todo
+- [前端功能简介](https://docs.blocapp.xyz/docs/category/web%E7%AB%AF%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B)
+- [bloc函数节点开发教程](https://github.com/fBloc/bloc-client-python/blob/main/README.zh-CN.md#%E7%BC%96%E5%86%99bloc-function)
